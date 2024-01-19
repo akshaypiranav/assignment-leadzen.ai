@@ -1,0 +1,13 @@
+{% extends "header.htm" %}
+{% block content %}
+<div class="container col-md-6 col-sm-6 col-lg-6 col-xs-6 border border-primary rounded" style="margin-top: 80px;">
+    <h1 class="text-center p-2">TODO APP</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="todo" class="ms-1 text-primary">TITLE</label>
+        <input type="text" id="todo" name="todo" value="{{data.todo}}" id="" class="form form-control my-2" placeholder="ENTER THE TODO JOB">
+        <label for="description" class="ms-1 text-primary">DETAILS</label>
+        <textarea name="description"  id="description" placeholder="ENTER THE DESCRIPTION" id="" cols="30" rows="5" class="form form-control my-2">{{data.decription}}</textarea>
+        <input type="submit" value="UPDATE N BACK" class="btn btn-primary my-2 w-100">
+    </form>
+{% endblock  %}

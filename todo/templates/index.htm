@@ -1,0 +1,38 @@
+{% extends "header.htm" %}
+{% block content %}
+<div class="container col-md-6 col-sm-6 col-lg-6 col-xs-6 border border-primary rounded" style="margin-top: 90px;">
+    <h1 class="text-center">TODO APP</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" required name="todo" id="" class="form form-control my-2" placeholder="ENTER THE TODO JOB">
+        <textarea name="description" required placeholder="ENTER THE DESCRIPTION" id="" cols="30" rows="2" class="form form-control my-2"></textarea>
+        <input type="submit" value="ADD" class="btn btn-primary my-2 w-100">
+    </form>
+    {% if data %}
+    <div class="table-responsive">
+
+            <table class="table text-center">
+                <thead>
+                    <th>S.NO</th>
+                    <th>TODO</th>
+                    <th>DATE</th>
+                    <th>SHOW</th>
+                    <th>FINISH</th>
+                </thead>
+                {% for i in data %}
+                <tbody>
+                
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.todo}}</td>
+                    <td>{{i.date}}</td>
+                    <td><a href="/update/{{i.id}}" class="btn btn-success">SHOW</a></td>
+                    <td><a href="/delete/{{i.id}}" class="btn btn-danger">FINISHED</a></td>
+
+                </tbody>
+                {% endfor %}
+            </table>
+    {% endif %}
+</div>
+</div>
+
+{% endblock %}
