@@ -1,0 +1,32 @@
+{% extends "header.htm" %}
+
+{% block content %}
+<div class="container col-11 border border-primary rounded mt-5">
+    <br>
+<header class=" text-center display-3 fw-bold">SL News Weather Report</header>
+<article class="text-secondary text-center  " >"Here you can search for any City Weather Report"</article><br>
+<form action="/" method="post">
+    {% csrf_token %}
+    <input type="text" name="name" class="form form-control border border-primary " autofocus name="city" placeholder="Enter City Name"><br>
+    <input type="submit" value="Search" class="btn btn-primary w-100"><br><br>
+</form>
+</div><br>
+<main>
+    <div class="container col-8 border border-primary rounded mt-5 mb-5"> <br>
+        <header class="text-center " ><h1 class="fw-bold">Cities Weather Report</h1></header><br>
+        {% if city_values  %}
+            {% for city_data in city_values %}
+                <div class="container col-6 my-2 py-4 rounded col-md-6 col-xs-6 border border-primary text-center ">
+                        <h2 class="fw-bold">Weather Details for {{ city_data.city_name | title }}</h2>
+                        <p>Temperature: {{ city_data.temp }}°C</p>
+                        <a href= 'delete/{{city_data.id}}' class="btn btn-danger w-100" >Delete</a>
+
+                    
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</main>
+
+{% endblock %}
