@@ -1,0 +1,63 @@
+{% extends "header.htm" %}
+
+{% block content %}
+
+<div class="container row justify-content-between  " style="margin-top: 110px;">
+    <h1 class="display-4 fw-bold text-center">
+        EXPENSE TRACKER
+    </h1>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6  my-4">
+        <h1 class="fw-bold text-center my-2">FILL THE DETAILS</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="expense" placeholder="ENTER YOUR EXPENSE" class="form form-control my-4" id="">
+            <input type="number" name="amount" placeholder="HOW MUCH AMOUNT YOU SPENT" class="form form-control my-4" id="">
+            <select name="category" class="form form-control" id="">
+                <option value="" selected disabled>SELECT THE CATEGORY</option>
+                <option value="NECCESSARY" >NECCESSARY</option>
+                <option value="UNNECCESSARY" >UNNECCESSARY</option>
+            </select>
+
+            <input type="submit" value="ADD EXPENSE" class="btn btn-primary my-4 w-100">
+
+        </form>
+
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6  my-4">
+        <h1 class="fw-bold text-center my-2">YOUR EXPENSES</h1>
+        <table class="table text-center">
+            <thead>
+                <th>SNO</th>
+                <th>EXPENSE</th>
+                <th>AMOUNT</th>
+                <th>CATEGORY</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </thead>
+            {% for i in data %}
+
+            <tbody >
+                {% if i.category|lower == "unneccessary" %}
+                <td class="bg-danger">{{forloop.counter}}</td>
+                <td class="bg-danger">{{i.expense | title}}</td>
+                <td class="bg-danger">{{i.amount}}</td>
+
+                <td class="bg-danger">{{i.category | title}}</td>
+
+            {% elif i.category|lower == "neccessary" %}
+            <td class="bg-success">{{forloop.counter}}</td>
+            <td class="bg-success">{{i.expense | title}}</td>
+            <td class="bg-success">{{i.amount}}</td>
+            <td class="bg-success">{{i.category | title}}</td>
+            {% endif %}
+
+            <td><a href="/update/{{i.id}}" class="btn btn-success">Update</a></td> 
+            <td><a href="/delete/{{i.id}}" class="btn btn-danger">Delete</a></td> 
+            
+        </div></tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
